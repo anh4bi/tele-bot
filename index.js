@@ -11,6 +11,7 @@ bot.command("copy", async (ctx) => {
     // await ctx.reply("Fetching...");
     console.log("Copy: ", ctx.payload);
     const tors = await nyaa.findTorrents(ctx.payload);
+    console.log("Torrents: ", tors);
 
     const buttons = [...tors.splice(0, 5)].map((torrent) => {
       return [Markup.button.callback(torrent.name, `copy-${torrent.id}`)];
