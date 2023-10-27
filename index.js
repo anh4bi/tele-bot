@@ -11,7 +11,7 @@ bot.command("copy", async (ctx) => {
     // await ctx.reply("Fetching...");
     console.log("Copy: ", ctx.payload);
     const tors = await nyaa.findTorrents(ctx.payload);
-    console.log("Torrents: ", tors);
+    console.log("Torrents: ",  tors.length);
 
     const buttons = [...tors.splice(0, 5)].map((torrent) => {
       return [Markup.button.callback(torrent.name, `copy-${torrent.id}`)];
@@ -34,7 +34,7 @@ bot.action(/^copy-(\d+)$/, async (ctx) => {
   const selectedTorrent = await nyaa.getTorrentById(torrentId);
   console.log("lstTorrent: ", selectedTorrent);
 
-  await clipboardy.writeSync(selectedTorrent.links.magnet);
+  //await clipboardy.writeSync(selectedTorrent.links.magnet);
 
   // Using context shortcut
   await ctx.answerCbQuery();
@@ -42,19 +42,7 @@ bot.action(/^copy-(\d+)$/, async (ctx) => {
   return ctx.answerCbQuery(`Param: ${ctx.match[1]}! 👍`);
 });
 
-bot.action("copy", async (ctx) => {
-  // Explicit usage
-  await ctx.telegram.answerCbQuery(ctx.callbackQuery.id);
-  // const idx = ctx.callbackQuery.data.split(":")[1];
-  // console.log("Index: ", idx);
-  console.log("lstTorrent: ", await nyaa.getTorrentById(3985443));
 
-  //   await clipboardy.writeSync(selectedTorrent.magnet);
-
-  // Using context shortcut
-  await ctx.answerCbQuery();
-  await ctx.reply("Copied!");
-});
 
 bot.catch((err) => {
   console.log("Error: ", err);
