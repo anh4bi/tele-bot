@@ -14,7 +14,7 @@ bot.command("copy", async (ctx) => {
     console.log("Torrents: ",  tors.length);
 
     const buttons = [...tors.splice(0, 5)].map((torrent) => {
-      return [Markup.button.callback(torrent.name, `copy-${torrent.id}`)];
+      return [Markup.button.callback(`${torrent.seed} - ${torrent.name}`, `copy-${torrent.id}`)];
     });
 
     await ctx.reply(
