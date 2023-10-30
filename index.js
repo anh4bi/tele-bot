@@ -6,7 +6,7 @@ const nyaa = new NyaaService([]);
 
 const bot = new Telegraf("5979158347:AAGCMjyfh2B5x7xWY5IGnpbJX_F3Y2SpMTQ");
 
-bot.command("copy", async (ctx) => {
+bot.command("cp", async (ctx) => {
   try {
     // await ctx.reply("Fetching...");
     console.log("Copy: ", ctx.payload);
